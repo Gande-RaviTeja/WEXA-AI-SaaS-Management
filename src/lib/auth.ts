@@ -1,6 +1,5 @@
-import { SignJWT, jwtVerify } from 'jose'
+import { SignJWT, jwtVerify, type JWTPayload } from 'jose'
 import { cookies } from 'next/headers'
-import { prisma } from './prisma'
 
 const COOKIE_NAME = 'stockflow-session'
 const SESSION_DURATION = 60 * 60 * 24 * 7 // 7 days in seconds
@@ -13,7 +12,7 @@ function getSecret() {
   return new TextEncoder().encode(secret)
 }
 
-export interface SessionPayload {
+export interface SessionPayload extends JWTPayload {
   userId: string
   organizationId: string
   email: string
@@ -60,6 +59,7 @@ export async function requireSession(): Promise<SessionPayload> {
   if (!session) {
     const { redirect } = await import('next/navigation')
     redirect('/login')
+    throw new Error('Unauthorized')
   }
   return session
 }

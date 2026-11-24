@@ -2,7 +2,7 @@ import { z } from 'zod'
 
 export const settingsSchema = z.object({
   defaultLowStockThreshold: z
-    .number({ invalid_type_error: 'Threshold must be a number' })
+    .number()
     .int('Threshold must be a whole number')
     .min(0, 'Threshold cannot be negative'),
 })
