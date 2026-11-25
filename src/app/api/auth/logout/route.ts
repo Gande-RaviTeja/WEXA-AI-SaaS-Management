@@ -1,9 +1,13 @@
 import { clearSession } from '@/lib/auth'
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 
-export async function POST() {
+export async function POST(request: NextRequest) {
   await clearSession()
-  return NextResponse.redirect(
-    new URL('/login', process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000'),
-  )
+  return NextResponse.redirect(new URL('/login', request.url))
 }
+
+export async function GET(request: NextRequest) {
+  await clearSession()
+  return NextResponse.redirect(new URL('/login', request.url))
+}
+

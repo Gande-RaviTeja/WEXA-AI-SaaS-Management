@@ -2,12 +2,14 @@ import { requireSession } from '@/lib/auth'
 import { getOrg } from '@/lib/data/organizations'
 import { ToastProvider } from '@/components/ui/Toast'
 import { SidebarNav } from '@/components/SidebarNav'
-import { notFound } from 'next/navigation'
+import { redirect } from 'next/navigation'
 
 export default async function AppLayout({ children }: { children: React.ReactNode }) {
   const session = await requireSession()
   const org = await getOrg(session.organizationId)
-  if (!org) notFound()
+  if (!org) {
+    redirect('/api/auth/logout')
+  }
 
   return (
     <ToastProvider>

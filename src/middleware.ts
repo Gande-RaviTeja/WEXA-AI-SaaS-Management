@@ -36,6 +36,11 @@ export async function middleware(request: NextRequest) {
     )
   }
 
+  // Support easy logout via /logout URL
+  if (pathname === '/logout') {
+    return NextResponse.redirect(new URL('/api/auth/logout', request.url))
+  }
+
   // Guard protected routes
   if (isProtected && !isAuthenticated) {
     return NextResponse.redirect(new URL('/login', request.url))
@@ -50,5 +55,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/', '/dashboard/:path*', '/products/:path*', '/settings/:path*', '/login', '/signup'],
+  matcher: ['/', '/dashboard/:path*', '/products/:path*', '/settings/:path*', '/login', '/signup', '/logout'],
 }
