@@ -29,6 +29,14 @@ function handlePrismaError(e: unknown): ProductActionResult {
   return { message: 'Something went wrong. Please try again.' }
 }
 
+function parseOptionalNumber(val: FormDataEntryValue | null): number | null {
+  if (val === null || val === undefined) return null
+  const s = val.toString().trim()
+  if (s === '') return null
+  const n = Number(s)
+  return isNaN(n) ? null : n
+}
+
 export async function createProductAction(
   _prev: ProductActionResult | null,
   formData: FormData,
@@ -41,11 +49,9 @@ export async function createProductAction(
     sku: formData.get('sku'),
     description: formData.get('description') || '',
     quantity: Number(formData.get('quantity')),
-    costPrice: formData.get('costPrice') ? Number(formData.get('costPrice')) : null,
-    sellingPrice: formData.get('sellingPrice') ? Number(formData.get('sellingPrice')) : null,
-    lowStockThreshold: formData.get('lowStockThreshold')
-      ? Number(formData.get('lowStockThreshold'))
-      : null,
+    costPrice: parseOptionalNumber(formData.get('costPrice')),
+    sellingPrice: parseOptionalNumber(formData.get('sellingPrice')),
+    lowStockThreshold: parseOptionalNumber(formData.get('lowStockThreshold')),
   }
 
   const parsed = productSchema.safeParse(raw)
@@ -77,11 +83,9 @@ export async function updateProductAction(
     sku: formData.get('sku'),
     description: formData.get('description') || '',
     quantity: Number(formData.get('quantity')),
-    costPrice: formData.get('costPrice') ? Number(formData.get('costPrice')) : null,
-    sellingPrice: formData.get('sellingPrice') ? Number(formData.get('sellingPrice')) : null,
-    lowStockThreshold: formData.get('lowStockThreshold')
-      ? Number(formData.get('lowStockThreshold'))
-      : null,
+    costPrice: parseOptionalNumber(formData.get('costPrice')),
+    sellingPrice: parseOptionalNumber(formData.get('sellingPrice')),
+    lowStockThreshold: parseOptionalNumber(formData.get('lowStockThreshold')),
   }
 
   const parsed = productSchema.safeParse(raw)

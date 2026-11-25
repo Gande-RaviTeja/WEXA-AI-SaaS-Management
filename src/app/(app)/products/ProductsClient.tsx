@@ -2,6 +2,7 @@
 
 import { useState, useMemo, useTransition, useCallback } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { deleteProductAction } from '@/actions/products'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
@@ -25,6 +26,7 @@ interface ProductsClientProps {
 }
 
 export function ProductsClient({ products, orgThreshold }: ProductsClientProps) {
+  const router = useRouter()
   const { toast } = useToast()
   const [search, setSearch] = useState('')
   const [deleteTarget, setDeleteTarget] = useState<ProductRow | null>(null)
@@ -45,12 +47,13 @@ export function ProductsClient({ products, orgThreshold }: ProductsClientProps) 
       const res = await deleteProductAction(deleteTarget.id)
       if (res.message === 'Product deleted successfully') {
         toast(`"${deleteTarget.name}" deleted`, 'success')
+        router.refresh()
       } else {
         toast(res.message ?? 'Failed to delete product', 'error')
       }
       setDeleteTarget(null)
     })
-  }, [deleteTarget, toast])
+  }, [deleteTarget, toast, router])
 
   function isLow(p: ProductRow) {
     const threshold = p.lowStockThreshold ?? orgThreshold

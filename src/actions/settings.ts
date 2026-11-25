@@ -32,5 +32,6 @@ export async function updateSettingsAction(
 
   revalidatePath('/settings')
   revalidatePath('/dashboard')
+  revalidatePath('/products')
   return { success: true, message: 'Settings saved successfully' }
 }

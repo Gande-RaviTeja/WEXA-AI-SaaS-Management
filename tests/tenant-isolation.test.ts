@@ -1,40 +1,36 @@
 // Tenant isolation tests
-// These tests run against a real SQLite test DB (prisma test environment)
-
 import { describe, it, expect, beforeAll, afterAll } from 'vitest'
-import { PrismaClient } from '@prisma/client'
+import { prisma } from '../src/lib/prisma'
 import {
   listProducts,
   getProduct,
-  createProduct,
   updateProduct,
   deleteProduct,
 } from '../src/lib/data/products'
-
-// Use a separate test database
-process.env.DATABASE_URL = 'file:./prisma/test.db'
-
-const prisma = new PrismaClient()
 
 let orgAId: string
 let orgBId: string
 let orgAProductId: string
 let orgBProductId: string
-let sharedSkuProductBId: string
 
 beforeAll(async () => {
-  // Clean slate
-  await prisma.product.deleteMany()
-  await prisma.user.deleteMany()
-  await prisma.organization.deleteMany()
+  // Clean up any previous test runs
+  const existingOrgs = await prisma.organization.findMany({
+    where: { name: { in: ['Isolation Org A', 'Isolation Org B'] } },
+  })
+  const existingIds = existingOrgs.map((o) => o.id)
+  if (existingIds.length > 0) {
+    await prisma.product.deleteMany({ where: { organizationId: { in: existingIds } } })
+    await prisma.organization.deleteMany({ where: { id: { in: existingIds } } })
+  }
 
   const orgA = await prisma.organization.create({
-    data: { name: 'Org A', defaultLowStockThreshold: 5 },
+    data: { name: 'Isolation Org A', defaultLowStockThreshold: 5 },
   })
   orgAId = orgA.id
 
   const orgB = await prisma.organization.create({
-    data: { name: 'Org B', defaultLowStockThreshold: 5 },
+    data: { name: 'Isolation Org B', defaultLowStockThreshold: 5 },
   })
   orgBId = orgB.id
 
@@ -44,19 +40,16 @@ beforeAll(async () => {
   })
   orgAProductId = productA.id
 
-  // Product in Org B
+  // Product in Org B (same SKU — allowed across organizations)
   const productB = await prisma.product.create({
-    data: { organizationId: orgBId, name: 'Widget B', sku: 'WGT-001', quantity: 20 }, // same SKU — allowed cross-org
+    data: { organizationId: orgBId, name: 'Widget B', sku: 'WGT-001', quantity: 20 },
   })
   orgBProductId = productB.id
-  sharedSkuProductBId = productB.id
 })
 
 afterAll(async () => {
-  await prisma.product.deleteMany()
-  await prisma.user.deleteMany()
-  await prisma.organization.deleteMany()
-  await prisma.$disconnect()
+  await prisma.product.deleteMany({ where: { organizationId: { in: [orgAId, orgBId] } } })
+  await prisma.organization.deleteMany({ where: { id: { in: [orgAId, orgBId] } } })
 })
 
 describe('Tenant isolation — listProducts', () => {
@@ -121,7 +114,6 @@ describe('Tenant isolation — deleteProduct', () => {
 
 describe('SKU uniqueness', () => {
   it('allows the same SKU across different organizations', async () => {
-    // Both orgs have WGT-001 — no error should have been thrown in beforeAll
     const aProduct = await getProduct(orgAProductId, orgAId)
     const bProduct = await getProduct(orgBProductId, orgBId)
     expect(aProduct?.sku).toBe('WGT-001')
