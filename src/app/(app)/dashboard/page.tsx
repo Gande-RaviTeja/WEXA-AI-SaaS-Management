@@ -91,29 +91,38 @@ export default async function DashboardPage() {
                 <TableHead>SKU</TableHead>
                 <TableHead className="text-right">Quantity</TableHead>
                 <TableHead className="text-right">Threshold</TableHead>
+                <TableHead className="text-right pr-6">Action</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {stats.lowStockItems.map((item) => (
-                <TableRow key={item.id}>
+                <TableRow key={item.id} className="hover:bg-gray-50/60 transition-colors">
                   <TableCell>
                     <Link
                       href={`/products/${item.id}/edit`}
-                      className="font-medium text-gray-900 hover:text-indigo-600 transition-colors"
+                      className="font-semibold text-gray-900 hover:text-indigo-600 transition-colors"
                     >
                       {item.name}
                     </Link>
                   </TableCell>
                   <TableCell>
-                    <code className="rounded bg-gray-100 px-1.5 py-0.5 text-xs text-gray-600">
+                    <code className="rounded bg-gray-100 px-2 py-0.5 text-xs font-mono font-medium text-gray-700">
                       {item.sku}
                     </code>
                   </TableCell>
-                  <TableCell className="text-right font-medium text-red-600">
-                    {item.quantity}
+                  <TableCell className="text-right font-bold tabular-nums text-amber-600">
+                    {item.quantity} units
                   </TableCell>
-                  <TableCell className="text-right text-gray-500">
-                    {item.effectiveThreshold}
+                  <TableCell className="text-right text-xs text-gray-500 font-mono">
+                    ≤ {item.effectiveThreshold}
+                  </TableCell>
+                  <TableCell className="text-right pr-6">
+                    <Link
+                      href={`/products/${item.id}/adjust`}
+                      className="inline-flex items-center gap-1 text-xs font-semibold text-indigo-600 hover:text-indigo-800 bg-indigo-50 hover:bg-indigo-100 px-2.5 py-1 rounded-md transition-colors"
+                    >
+                      Restock
+                    </Link>
                   </TableCell>
                 </TableRow>
               ))}
