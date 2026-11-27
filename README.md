@@ -10,7 +10,7 @@ StockFlow is a minimal, polished, multi-tenant SaaS inventory management applica
 | --- | --- | --- |
 | **Framework** | Next.js 16 (App Router) | Server Components, Server Actions, modern layouts & streaming |
 | **Language** | TypeScript | Strict type checking across components, actions, and data layer |
-| **Database & ORM** | Prisma ORM + SQLite | Schema is Postgres-compatible with clean driver adapter configuration |
+| **Database & ORM** | Prisma ORM 7 + PostgreSQL (Neon) | Configured with `@prisma/adapter-pg` and `pg.Pool` connection pooling |
 | **Styling** | Tailwind CSS v4 + PostCSS | Linear/Stripe-inspired clean SaaS theme, neutral grays, single indigo accent |
 | **Typography** | Inter | Loaded via `next/font/google` with fallback font definitions |
 | **Authentication** | Custom Session Cookie | Signed JWT via `jose` (HS256) stored in `httpOnly`, `SameSite=Lax` cookies; bcrypt for password hashing |
@@ -100,6 +100,46 @@ Included test suites:
 - **`tests/verify-m2.test.ts`**: Verifies validation rules, password hashing, and authentication error handling.
 - **`tests/verify-m3-m4.test.ts`**: Verifies full product lifecycle, search, delete modal logic, dashboard aggregations, and settings persistence.
 - **`tests/adjust-stock.test.ts`**: Verifies inline stock increments, decrements, floor clamping (never negative), and audit attribution (`lastUpdatedBy`).
+
+---
+
+## Production Deployment (PostgreSQL / Neon)
+
+StockFlow is configured for PostgreSQL using Prisma 7 and `@prisma/adapter-pg`.
+
+### Required Environment Variables
+Configure these in your production host (Vercel, Render, Railway, Docker, etc.):
+
+| Variable | Description | Example / Format |
+| :--- | :--- | :--- |
+| `DATABASE_URL` | PostgreSQL connection string | `postgresql://user:pass@ep-xyz.us-east-2.aws.neon.tech/neondb?sslmode=require` |
+| `TEST_DATABASE_URL` | *(Optional)* Dedicated test database URL | `postgresql://user:pass@ep-xyz-test.us-east-2.aws.neon.tech/neondb?sslmode=require` |
+| `SESSION_SECRET` | 32+ character JWT encryption key | `your-secure-random-secret-key-min-32-chars` |
+| `NEXT_PUBLIC_APP_URL` | Production public URL | `https://stockflow.yourdomain.com` |
+
+### Deploying & Migrating the Database
+
+1. **Install Dependencies & Generate Client**:
+   ```bash
+   npm install
+   ```
+   *(The `postinstall` script automatically runs `prisma generate`).*
+
+2. **Apply Migrations to Production**:
+   ```bash
+   npx prisma migrate deploy
+   ```
+
+3. **Seed Initial Demo Data**:
+   ```bash
+   npx prisma db seed
+   ```
+
+4. **Build and Start Production Server**:
+   ```bash
+   npm run build
+   npm start
+   ```
 
 ---
 

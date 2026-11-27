@@ -1,12 +1,11 @@
-// Prisma schema — SQLite provider, Postgres-compatible types
-// Use Float for decimals (SQLite has no Decimal type); Postgres migration uses Decimal
+// Prisma schema — PostgreSQL provider (Neon)
 
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
 }
 
 model Organization {
