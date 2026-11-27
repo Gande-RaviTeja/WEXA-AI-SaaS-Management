@@ -2,7 +2,7 @@
 
 StockFlow is a minimal, polished, multi-tenant SaaS inventory management application built for desktop browsers using Next.js (App Router), TypeScript, Tailwind CSS, and Prisma ORM with PostgreSQL.
 
-> **Live Demo:** `https://your-stockflow-app.vercel.app` *(deploying on Vercel)*  
+> **Live Demo:** [https://wexa-ai-saas-management.vercel.app](https://wexa-ai-saas-management.vercel.app)  
 > **Demo Logins:** `alice@acme.com` / `password123` (Acme Hardware) &bull; `carol@bluenile.com` / `password123` (Blue Nile Electronics)
 
 ---
