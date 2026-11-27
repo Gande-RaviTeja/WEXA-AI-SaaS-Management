@@ -1,6 +1,9 @@
 # StockFlow MVP
 
-StockFlow is a minimal, polished, multi-tenant SaaS inventory management application built for desktop browsers using Next.js (App Router), TypeScript, Tailwind CSS, and Prisma ORM.
+StockFlow is a minimal, polished, multi-tenant SaaS inventory management application built for desktop browsers using Next.js (App Router), TypeScript, Tailwind CSS, and Prisma ORM with PostgreSQL.
+
+> **Live Demo:** `https://your-stockflow-app.vercel.app` *(deploying on Vercel)*  
+> **Demo Logins:** `alice@acme.com` / `password123` (Acme Hardware) &bull; `carol@bluenile.com` / `password123` (Blue Nile Electronics)
 
 ---
 
@@ -28,7 +31,7 @@ Ensure you have **Node.js 18+** installed.
 npm install
 
 # 2. Run migrations
-npx prisma migrate dev
+npx prisma migrate deploy
 
 # 3. Seed demo organizations and inventory
 npx prisma db seed
