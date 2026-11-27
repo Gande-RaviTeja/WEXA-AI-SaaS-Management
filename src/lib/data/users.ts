@@ -12,6 +12,26 @@ export async function getUserByEmail(email: string) {
   })
 }
 
+export async function getUserById(id: string) {
+  return prisma.user.findUnique({
+    where: { id },
+    select: {
+      id: true,
+      email: true,
+      passwordHash: true,
+      organizationId: true,
+      createdAt: true,
+    },
+  })
+}
+
+export async function updateUserPassword(id: string, passwordHash: string) {
+  return prisma.user.update({
+    where: { id },
+    data: { passwordHash },
+  })
+}
+
 export async function createUserWithOrg(
   email: string,
   passwordHash: string,

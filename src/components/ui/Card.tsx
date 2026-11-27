@@ -30,3 +30,9 @@ export function CardTitle({ className, ...props }: HTMLAttributes<HTMLHeadingEle
     <h3 className={cn('text-base font-semibold text-gray-900', className)} {...props} />
   )
 }
+
+export function CardDescription({ className, ...props }: HTMLAttributes<HTMLParagraphElement>) {
+  return (
+    <p className={cn('text-xs text-gray-500 mt-0.5', className)} {...props} />
+  )
+}
