@@ -168,11 +168,14 @@ export function ProductsClient({ products, orgThreshold }: ProductsClientProps) 
         <button
           type="button"
           onClick={() => setStatusFilter('all')}
-          className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${statusFilter === 'all'
+          className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${statusFilter === 'all'
             ? 'bg-gray-900 text-white shadow-sm ring-2 ring-gray-900/20'
             : 'bg-white text-gray-700 border border-gray-200 hover:bg-gray-50'
             }`}
         >
+          <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
+          </svg>
           <span>All Items</span>
           <span
             className={`rounded-full px-1.5 py-0.5 text-[11px] ${statusFilter === 'all' ? 'bg-gray-700 text-gray-100' : 'bg-gray-100 text-gray-600'
@@ -185,12 +188,15 @@ export function ProductsClient({ products, orgThreshold }: ProductsClientProps) 
         <button
           type="button"
           onClick={() => setStatusFilter('low')}
-          className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${statusFilter === 'low'
+          className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${statusFilter === 'low'
             ? 'bg-amber-600 text-white shadow-sm ring-2 ring-amber-600/30'
             : 'bg-white text-amber-800 border border-amber-200 hover:bg-amber-50/70'
             }`}
         >
-          <span>⚠️ Low Stock</span>
+          <svg className="h-3.5 w-3.5 shrink-0" viewBox="0 0 20 20" fill="currentColor">
+            <path fillRule="evenodd" d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 5zm0 9a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
+          </svg>
+          <span>Low Stock</span>
           <span
             className={`rounded-full px-1.5 py-0.5 text-[11px] font-bold ${statusFilter === 'low' ? 'bg-amber-700 text-amber-100' : 'bg-amber-100 text-amber-800'
               }`}
@@ -202,12 +208,15 @@ export function ProductsClient({ products, orgThreshold }: ProductsClientProps) 
         <button
           type="button"
           onClick={() => setStatusFilter('out')}
-          className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${statusFilter === 'out'
+          className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${statusFilter === 'out'
             ? 'bg-red-600 text-white shadow-sm ring-2 ring-red-600/30'
             : 'bg-white text-red-800 border border-red-200 hover:bg-red-50/70'
             }`}
         >
-          <span>🔴 Out of Stock</span>
+          <svg className="h-3.5 w-3.5 shrink-0" viewBox="0 0 20 20" fill="currentColor">
+            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z" clipRule="evenodd" />
+          </svg>
+          <span>Out of Stock</span>
           <span
             className={`rounded-full px-1.5 py-0.5 text-[11px] font-bold ${statusFilter === 'out' ? 'bg-red-700 text-red-100' : 'bg-red-100 text-red-800'
               }`}
@@ -219,12 +228,15 @@ export function ProductsClient({ products, orgThreshold }: ProductsClientProps) 
         <button
           type="button"
           onClick={() => setStatusFilter('in')}
-          className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${statusFilter === 'in'
+          className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${statusFilter === 'in'
             ? 'bg-emerald-600 text-white shadow-sm ring-2 ring-emerald-600/30'
             : 'bg-white text-emerald-800 border border-emerald-200 hover:bg-emerald-50/70'
             }`}
         >
-          <span>✅ In Stock</span>
+          <svg className="h-3.5 w-3.5 shrink-0" viewBox="0 0 20 20" fill="currentColor">
+            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" />
+          </svg>
+          <span>In Stock</span>
           <span
             className={`rounded-full px-1.5 py-0.5 text-[11px] font-bold ${statusFilter === 'in'
               ? 'bg-emerald-700 text-emerald-100'
