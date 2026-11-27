@@ -130,7 +130,12 @@ Configure these in your production host (Vercel, Render, Railway, Docker, etc.):
    npx prisma migrate deploy
    ```
 
-3. **Seed Initial Demo Data**:
+3. **Apply Migrations to Test Branch (Optional for Isolation)**:
+   ```bash
+   npm run db:migrate:test
+   ```
+
+4. **Seed Initial Demo Data**:
    ```bash
    npx prisma db seed
    ```
