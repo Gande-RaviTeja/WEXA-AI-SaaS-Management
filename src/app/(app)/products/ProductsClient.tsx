@@ -168,17 +168,15 @@ export function ProductsClient({ products, orgThreshold }: ProductsClientProps) 
         <button
           type="button"
           onClick={() => setStatusFilter('all')}
-          className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
-            statusFilter === 'all'
-              ? 'bg-gray-900 text-white shadow-sm ring-2 ring-gray-900/20'
-              : 'bg-white text-gray-700 border border-gray-200 hover:bg-gray-50'
-          }`}
+          className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${statusFilter === 'all'
+            ? 'bg-gray-900 text-white shadow-sm ring-2 ring-gray-900/20'
+            : 'bg-white text-gray-700 border border-gray-200 hover:bg-gray-50'
+            }`}
         >
           <span>All Items</span>
           <span
-            className={`rounded-full px-1.5 py-0.5 text-[11px] ${
-              statusFilter === 'all' ? 'bg-gray-700 text-gray-100' : 'bg-gray-100 text-gray-600'
-            }`}
+            className={`rounded-full px-1.5 py-0.5 text-[11px] ${statusFilter === 'all' ? 'bg-gray-700 text-gray-100' : 'bg-gray-100 text-gray-600'
+              }`}
           >
             {counts.total}
           </span>
@@ -187,17 +185,15 @@ export function ProductsClient({ products, orgThreshold }: ProductsClientProps) 
         <button
           type="button"
           onClick={() => setStatusFilter('low')}
-          className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
-            statusFilter === 'low'
-              ? 'bg-amber-600 text-white shadow-sm ring-2 ring-amber-600/30'
-              : 'bg-white text-amber-800 border border-amber-200 hover:bg-amber-50/70'
-          }`}
+          className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${statusFilter === 'low'
+            ? 'bg-amber-600 text-white shadow-sm ring-2 ring-amber-600/30'
+            : 'bg-white text-amber-800 border border-amber-200 hover:bg-amber-50/70'
+            }`}
         >
           <span>⚠️ Low Stock</span>
           <span
-            className={`rounded-full px-1.5 py-0.5 text-[11px] font-bold ${
-              statusFilter === 'low' ? 'bg-amber-700 text-amber-100' : 'bg-amber-100 text-amber-800'
-            }`}
+            className={`rounded-full px-1.5 py-0.5 text-[11px] font-bold ${statusFilter === 'low' ? 'bg-amber-700 text-amber-100' : 'bg-amber-100 text-amber-800'
+              }`}
           >
             {counts.low}
           </span>
@@ -206,17 +202,15 @@ export function ProductsClient({ products, orgThreshold }: ProductsClientProps) 
         <button
           type="button"
           onClick={() => setStatusFilter('out')}
-          className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
-            statusFilter === 'out'
-              ? 'bg-red-600 text-white shadow-sm ring-2 ring-red-600/30'
-              : 'bg-white text-red-800 border border-red-200 hover:bg-red-50/70'
-          }`}
+          className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${statusFilter === 'out'
+            ? 'bg-red-600 text-white shadow-sm ring-2 ring-red-600/30'
+            : 'bg-white text-red-800 border border-red-200 hover:bg-red-50/70'
+            }`}
         >
           <span>🔴 Out of Stock</span>
           <span
-            className={`rounded-full px-1.5 py-0.5 text-[11px] font-bold ${
-              statusFilter === 'out' ? 'bg-red-700 text-red-100' : 'bg-red-100 text-red-800'
-            }`}
+            className={`rounded-full px-1.5 py-0.5 text-[11px] font-bold ${statusFilter === 'out' ? 'bg-red-700 text-red-100' : 'bg-red-100 text-red-800'
+              }`}
           >
             {counts.out}
           </span>
@@ -225,19 +219,17 @@ export function ProductsClient({ products, orgThreshold }: ProductsClientProps) 
         <button
           type="button"
           onClick={() => setStatusFilter('in')}
-          className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
-            statusFilter === 'in'
-              ? 'bg-emerald-600 text-white shadow-sm ring-2 ring-emerald-600/30'
-              : 'bg-white text-emerald-800 border border-emerald-200 hover:bg-emerald-50/70'
-          }`}
+          className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${statusFilter === 'in'
+            ? 'bg-emerald-600 text-white shadow-sm ring-2 ring-emerald-600/30'
+            : 'bg-white text-emerald-800 border border-emerald-200 hover:bg-emerald-50/70'
+            }`}
         >
           <span>✅ In Stock</span>
           <span
-            className={`rounded-full px-1.5 py-0.5 text-[11px] font-bold ${
-              statusFilter === 'in'
-                ? 'bg-emerald-700 text-emerald-100'
-                : 'bg-emerald-100 text-emerald-800'
-            }`}
+            className={`rounded-full px-1.5 py-0.5 text-[11px] font-bold ${statusFilter === 'in'
+              ? 'bg-emerald-700 text-emerald-100'
+              : 'bg-emerald-100 text-emerald-800'
+              }`}
           >
             {counts.inStock}
           </span>
@@ -457,13 +449,12 @@ export function ProductsClient({ products, orgThreshold }: ProductsClientProps) 
                       <div className="flex flex-col items-end gap-1">
                         <div className="flex items-center gap-2">
                           <span
-                            className={`text-sm font-bold tabular-nums ${
-                              isOut
-                                ? 'text-red-600'
-                                : isLow
+                            className={`text-sm font-bold tabular-nums ${isOut
+                              ? 'text-red-600'
+                              : isLow
                                 ? 'text-amber-600'
                                 : 'text-gray-900'
-                            }`}
+                              }`}
                           >
                             {formatNumber(product.quantity)} units
                           </span>
@@ -645,13 +636,12 @@ function StockMeter({
     <div className="flex items-center gap-2 w-36">
       <div className="h-1.5 flex-1 rounded-full bg-gray-100 overflow-hidden">
         <div
-          className={`h-full rounded-full transition-all duration-300 ${
-            isOut
-              ? 'w-0'
-              : isLow
+          className={`h-full rounded-full transition-all duration-300 ${isOut
+            ? 'w-0'
+            : isLow
               ? 'bg-amber-500'
               : 'bg-emerald-500'
-          }`}
+            }`}
           style={{ width: isOut ? '0%' : `${Math.max(percent, 8)}%` }}
         />
       </div>
